@@ -1,0 +1,62 @@
+.menu {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  /* background-color: rgba(0, 0, 0, 0.067); 
+  z-index: 1000; /* Ensure navbar is above the carousel */
+}
+
+.navbar-brand {
+  margin-left: 25px;
+  padding: 10px;
+  color: white; 
+}
+
+.navbar-nav .nav-link {
+  margin-right: 25px;
+  padding: 10px;
+  color: white; 
+}
+
+.navbar-toggler-icon {
+  color: white; 
+}
+
+main {
+  color: white; 
+} 
+
+.columns {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.iconos {
+    background-color: rgb(0, 183, 255);
+    
+}
+
+.cartas {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 2%;
+}
+
+.fondo {
+     background-color: rgb(0, 183, 255);
+}
+.forma {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 1%;
+    padding-bottom: 3%;
+}
+
+.pie {
+    color: white;
+    background-color: rgb(0, 183, 255);
+}
+
+.pie a {
+    color: white;
+}
