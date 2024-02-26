@@ -13,8 +13,8 @@ rl.question("Ingrese el primer número: ", (numero1) => {
     
     numero2 = parseFloat(numero2);
 
-    if (numero1 <= 0 || numero2 <= 0 || numero1 === numero2) {
-      console.log("Por favor ingrese dos números válidos y diferentes.");
+    if (numero1 <= 0 || numero2 <= 0) {
+      console.log("Ingrese dos números: ");
       rl.close();
     } else {
       
@@ -42,7 +42,7 @@ rl.question("Ingrese el primer número: ", (numero1) => {
               break;
             default:
               console.log(
-                "Operación no válida. Por favor ingrese una operación válida."
+                "Operación no válida."
               );
               break;
           }
