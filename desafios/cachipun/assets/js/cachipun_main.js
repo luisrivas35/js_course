@@ -17,11 +17,11 @@ function jugar() {
         (jugadaUsuario === "papel" && jugadaCPU === "piedra") ||
         (jugadaUsuario === "tijera" && jugadaCPU === "papel")
       ) {
-        resultado = "¡Ganaste!";
+        resultado = "Ganaste &#128512";
       } else if (jugadaUsuario === jugadaCPU) {
-        resultado = "¡Es un empate!";
+        resultado = "¡Es un empate! &#128517";
       } else {
-        resultado = "¡Perdiste!";
+        resultado = "Perdiste &#128557";
       }
 
       document.getElementById(
