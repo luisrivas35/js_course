@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   colores.forEach((color) => {
     color.addEventListener("click", function () {
-      const colorSeleccionado = window.getComputedStyle(color).backgroundColor; // Obtenemos el color computado
+      const colorSeleccionado = window.getComputedStyle(color).backgroundColor; 
       cuadroPrincipal.style.backgroundColor = colorSeleccionado;
     });
   });
