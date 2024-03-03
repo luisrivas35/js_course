@@ -1,0 +1,47 @@
+#cuadroPrincipal {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.color {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.blue {
+  background-color: blue;
+}
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}
+.orange {
+  background-color: orange;
+}
+.violet {
+  background-color: purple;
+}
+
+.calculator {
+  margin: 20px;
+}
+
+.calculator input,
+.calculator button {
+  margin: 5px;
+}
+
+.resultado {
+  margin-top: 10px;
+}
+
