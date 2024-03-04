@@ -212,19 +212,19 @@ dentalHtml.textContent = `Primera atención: ${
 ${dentalArray[dentalArray.length - 1].prevision}`;
 
 
-// tableRadiologia.innerHTML = "";
+tableRadiologia.innerHTML = "";
 
-// radiologiaArray.forEach((item, index, array) => {
-//   tableRadiologia.innerHTML += `
-//     <tr>
-//         <td scope="row">${item.hora}</td>
-//         <td>${item.especialista}</td>
-//         <td>${item.paciente}</td>
-//         <td>${item.rut}</td>
-//         <td>${item.prevision}</td>
-//     </tr>
-//     `;
-// });
+radiologiaArray.forEach((item, index, array) => {
+  tableRadiologia.innerHTML += `
+    <tr>
+        <td scope="row">${item.hora}</td>
+        <td>${item.especialista}</td>
+        <td>${item.paciente}</td>
+        <td>${item.rut}</td>
+        <td>${item.prevision}</td>
+    </tr>
+    `;
+});
 
 tableTrauma.innerHTML = "";
 
