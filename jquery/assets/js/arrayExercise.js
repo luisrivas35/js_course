@@ -141,7 +141,7 @@ $(function() {
                 <span class="badge text-bg-primary">${item.categoria["nombre-categoria"]}</span>
               </p>
               <p>${item.descripcion}</p>
-              <p>Tags: ${tagsHTML}</p> <!-- Insertar las etiquetas HTML de los tags en una sola línea -->
+              <p>Tags: ${tagsHTML}</p> 
             </div>
           </div>
         </article>
