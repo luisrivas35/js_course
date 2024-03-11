@@ -3,7 +3,8 @@ $(function () {
   const message = $("#message");
   const title = $("#title");
 
-  $("#searchBtn").on("click", function () {
+  $("#searchBtn").on("click", function (e) {
+    e.preventDefault();
     const heroId = $("#heroId").val();
     if (!isNaN(parseInt(heroId)) && isFinite(heroId)) {
       searchHero(heroId);
