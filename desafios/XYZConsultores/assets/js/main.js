@@ -3,11 +3,11 @@ import { Tax } from "./tax.js";
 
 
 const tax1 = new Tax(50000, 10000);
-const tax2 = new Tax(75000, 15000);
-const tax3 = new Tax(75000, 15000);
-const tax4 = new Tax(75000, 15000);
-const tax5 = new Tax(75000, 15000);
-const tax6 = new Tax(75000, 15000);
+const tax2 = new Tax(175000, 23000);
+const tax3 = new Tax(753000, 12000);
+const tax4 = new Tax(45000, 1000);
+const tax5 = new Tax(76000, 11000);
+const tax6 = new Tax(215000, 16000);
 
 const client1 = new Client("Johny", tax1);
 const client2 = new Client("Juanita", tax2);
