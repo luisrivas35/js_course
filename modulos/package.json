@@ -1,0 +1,17 @@
+{
+  "name": "modulos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "babel": "babel assets/js -d dist"
+  },
+  "keywords": [],
+  "author": "luis Rivas",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0"
+  }
+}
