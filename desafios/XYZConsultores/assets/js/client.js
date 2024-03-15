@@ -9,18 +9,18 @@ export class Client {
     this.#tax = tax;
   }
 
-  getName() {
+  get clientName() {
     return this.#name;
   }
 
-  setName(name) {
+  set clientName(name) {
     this.#name = name;
   }
 
   calculateTax() {
-    const taxRate = 0.21; 
+    const taxRate = 0.21;
     const taxableAmount =
-      this.#tax.getAnnualGrossAmount() - this.#tax.getDeduction();
+      this.#tax.taxAnnualGrossAmount - this.#tax.taxDeduction;
     const taxAmount = taxableAmount * taxRate;
     return taxAmount;
   }

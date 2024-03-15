@@ -7,10 +7,10 @@ export class Tax {
     this.#deduction = deduction;
   }
 
-  getAnnualGrossAmount() {
+  get taxAnnualGrossAmount() {
     return this.#annualGrossAmount;
   }
-  getDeduction() {
+  get taxDeduction() {
     return this.#deduction;
   }
 }
