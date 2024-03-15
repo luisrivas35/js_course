@@ -1,0 +1,28 @@
+"use strict";
+
+var _client = require("./client.js");
+var _tax = require("./tax.js");
+var tax1 = new _tax.Tax(50000, 10000);
+var tax2 = new _tax.Tax(75000, 15000);
+var tax3 = new _tax.Tax(75000, 15000);
+var tax4 = new _tax.Tax(75000, 15000);
+var tax5 = new _tax.Tax(75000, 15000);
+var tax6 = new _tax.Tax(75000, 15000);
+var client1 = new _client.Client("Johny", tax1);
+var client2 = new _client.Client("Juanita", tax2);
+var client3 = new _client.Client("Pedrito", tax3);
+var client4 = new _client.Client("Marie", tax4);
+var client5 = new _client.Client("Joseph", tax5);
+var client6 = new _client.Client("Siriaco", tax6);
+var taxAmountClient1 = client1.calculateTax();
+var taxAmountClient2 = client2.calculateTax();
+var taxAmountClient3 = client3.calculateTax();
+var taxAmountClient4 = client4.calculateTax();
+var taxAmountClient5 = client5.calculateTax();
+var taxAmountClient6 = client6.calculateTax();
+console.log("Tax for ".concat(client1.getName(), ": ").concat(taxAmountClient1));
+console.log("Tax for ".concat(client2.getName(), ": ").concat(taxAmountClient2));
+console.log("Tax for ".concat(client3.getName(), ": ").concat(taxAmountClient3));
+console.log("Tax for ".concat(client4.getName(), ": ").concat(taxAmountClient4));
+console.log("Tax for ".concat(client5.getName(), ": ").concat(taxAmountClient5));
+console.log("Tax for ".concat(client6.getName(), ": ").concat(taxAmountClient6));
