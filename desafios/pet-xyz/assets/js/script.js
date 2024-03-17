@@ -10,6 +10,7 @@ $(function () {
   const petType = $("#tipo");
   const disease = $("#enfermedad");
   const showResults = $("#resultado");
+  const message = $("#message");
   const regex = /^[a-zA-Z]+$/;
   const phoneRegex = /^\d+$/;
   const appointment = [];
@@ -25,7 +26,7 @@ $(function () {
       return;
     }
 
-    if (!validateNotEmpty(address, "Dirección")) {
+    if (!validateNotEmpty(address, "Residencia")) {
       return;
     }
 
@@ -46,26 +47,26 @@ $(function () {
   });
 
   function validate(input, fieldName) {
-    showResults.text(" ");
+    message.text(" ");
     const value = input.val().trim();
     if (regex.test(value)) {
       return true;
     } else {
-      const message = `El campo "${fieldName}" solo acepta letras`;
-      showResults.text(message).css("color", "red");
+      const text = `El campo "${fieldName}" solo acepta letras`;
+      message.text(text).css("color", "red");
       return false;
     }
   }
 
   function validatePhone(phoneNumber) {
-    showResults.text(" ");
+    message.text(" ");
     const value = phoneNumber.val().trim();
 
     if (phoneRegex.test(value)) {
       return true;
     } else {
-      const message = "El número de teléfono debe contener solo números";
-      showResults.text(message).css("color", "red");
+      const text = "El número de teléfono debe contener solo números";
+      message.text(text).css("color", "red");
       return false;
     }
   }
@@ -75,8 +76,8 @@ $(function () {
     if (value !== "") {
       return true;
     } else {
-      const message = `El campo "${fieldName}" no puede estar vacío`;
-      showResults.text(message).css("color", "red");
+      const text = `El campo "${fieldName}" no puede estar vacío`;
+      message.text(text).css("color", "red");
       return false;
     }
   }
