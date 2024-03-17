@@ -4,7 +4,8 @@ export class Pet extends Animal {
   #petName;
   #disease;
 
-  constructor(petName, disease) {
+  constructor(petName, disease, tipo) {
+    super(tipo); 
     this.#petName = petName;
     this.#disease = disease;
   }

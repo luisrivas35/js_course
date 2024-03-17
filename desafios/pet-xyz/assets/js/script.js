@@ -1,6 +1,6 @@
 import { Propietary } from "./propietary.js";
 import { Pet } from "./pet.js";
-import { Animal } from "./animal.js";
+
 
 $(function () {
   const owner = $("#propietario");
@@ -11,72 +11,89 @@ $(function () {
   const disease = $("#enfermedad");
   const showResults = $("#resultado");
   const regex = /^[a-zA-Z]+$/;
-  const phoneRegex = /^\d{10}$/;
+  const phoneRegex = /^\d+$/;
   const appointment = [];
 
   $("#addBtn").on("click", function (e) {
     e.preventDefault();
-    
+
     if (!validate(owner, "Propietario")) {
-      return; 
-    }
-    if (!validatePhone(phone, "Telefono")) {
       return;
-    }
-    if (!validateNotEmpty(address, "Dirección")) {
-      return; 
-    }
-    if (!validateNotEmpty(petName, "Nombre de la Mascota")){
-      return;
-    } 
-    if (!validateNotEmpty(disease, "Motivo de la Consulta")){
-      return; 
     }
 
-    createAppointment(owner.val(), phone.val(), address.val(), petName.val(), petType.val(), disease.val());
+    if (!validatePhone(phone)) {
+      return;
+    }
+
+    if (!validateNotEmpty(address, "Dirección")) {
+      return;
+    }
+
+    if (!validateNotEmpty(petName, "Nombre de la Mascota")) {
+      return;
+    }
+
+    if (!validateNotEmpty(disease, "Motivo de la Consulta")) {
+      return;
+    }
+
+    const client = new Propietary(owner.val(), address.val(), phone.val());
+    const pet = new Pet(petName.val(), disease.val(), petType.val());
+
+    appointment.push({ client, pet });
+
+    showAppointment();
   });
 
-   function validate(input, fieldName) {
-     showResults.text(" ");
-     const value = input.val().trim();
-     if (regex.test(value)) {
-       return true;
-     } else {
-       const message = `El campo "${fieldName}" solo acepta letras`;
-       showResults.text(message).css("color", "red");
+  function validate(input, fieldName) {
+    showResults.text(" ");
+    const value = input.val().trim();
+    if (regex.test(value)) {
+      return true;
+    } else {
+      const message = `El campo "${fieldName}" solo acepta letras`;
+      showResults.text(message).css("color", "red");
+      return false;
+    }
+  }
 
-       return false;
-     }
-   }
+  function validatePhone(phoneNumber) {
+    showResults.text(" ");
+    const value = phoneNumber.val().trim();
 
-   function validatePhone(phoneNumber) {
-     showResults.text(" ");
-     const value = phoneNumber.val().trim();
-     if (phoneRegex.test(value)) {
-       return true;
-     } else {
-       const message = "El número de teléfono debe tener solo numeros";
-       showResults.text(message).css("color", "red");
-       return false;
-     }
-   }
+    if (phoneRegex.test(value)) {
+      return true;
+    } else {
+      const message = "El número de teléfono debe contener solo números";
+      showResults.text(message).css("color", "red");
+      return false;
+    }
+  }
 
   function validateNotEmpty(input, fieldName) {
     const value = input.val().trim();
     if (value !== "") {
-      return true; // Input is not empty
+      return true;
     } else {
       const message = `El campo "${fieldName}" no puede estar vacío`;
       showResults.text(message).css("color", "red");
-      return false; // Input is empty
+      return false;
     }
   }
 
-  function createAppointment(owner, phone, address, petName, petType, disease){
-    const client = new Propietary(owner, phone, address)
-    const pet = new Pet(petName, disease, petType);
-    appointment.push({client, pet});
+  function showAppointment() {
+    showResults.html("");
+    appointment.forEach((item) => {
+      showResults.append(`
+        <tr>
+          <td scope="row">${item.client.name}</td>
+          <td>${item.client.address}</td>
+          <td>${item.client.phone}</td>
+          <td>${item.pet.tipo}</td>
+          <td>${item.pet.petName}</td>
+          <td>${item.pet.disease}</td>
+        </tr>
+      `);
+    });
   }
-
-  console.log(appointment);
 });
