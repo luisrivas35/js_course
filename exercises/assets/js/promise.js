@@ -24,21 +24,36 @@ const posts = [
 
 // promesa
 
-const findPostById = () => {
-  return new Promise((resolve, reject) => {
-    const post = posts[0];
-
+const findPosts = () => {
+  return new Promise((resolve) => {
     setTimeout(() => {
-      if (false) {
-        resolve(post);
-      } else {
-        reject("no se encontró el libro");
-      }
-    }, 2000);
+      resolve({
+        ok: true,
+        json() {
+          return new Promise((resolve) => {
+            resolve(posts);
+          });
+        },
+      });
+    }, 5000);
   });
 };
 
+const results = document.querySelector("#results");
+const loading = document.querySelector("#loading");
+
 // consumir la promesa
-findPostById()
-  .then((post) => console.log(post))
-  .catch((err) => console.log(err));
+findPosts()
+  .then((response) => response.json())
+  .then((posts) => {
+    posts.forEach((item) => {
+      results.innerHTML += `<li>${item.title}</li>`;
+    });
+  })
+  .catch((err) => console.log(err))
+  .finally(() => {
+    // loading.innerHTML = ""
+    loading.style.display = "none";
+  });
+
+console.log("resto del código");
