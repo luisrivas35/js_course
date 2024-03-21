@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <button onclick="getPosts()">Traer Posts </button>
-  <div id="post-data"></div>
-</body>
-<script src="./desafioI.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="./assets/css/style.css" /> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container pt-4">
+      <div>
+        <div><button onclick="getPosts()">Traer Posts</button></div>
+        <div class="pt-4" id="post-data"></div>
+      </div>
+    </div>
+
+    <script src="/assets/js/getposts.js"></script>
+  </body>
 </html>
