@@ -193,7 +193,7 @@ const showModal = (animal) => {
     infoCard.classList.add("info-card");
 
     const animalName = document.createElement("h5");
-    animalName.textContent = `Nombre: ${animal.name}`;
+    animalName.textContent = `Name: ${animal.name}`;
 
     const animalImage = document.createElement("img");
     animalImage.src = animal.img;
@@ -201,18 +201,19 @@ const showModal = (animal) => {
     animalImage.classList.add("modal-animal-image");
 
     const animalAge = document.createElement("p");
-    animalAge.textContent = `Edad: ${animal.age}`;
+    animalAge.textContent = `Age: ${animal.age}`;
 
     const animalComments = document.createElement("p");
-    animalComments.textContent = `Comentarios: ${animal.comments}`;
+    animalComments.textContent = `Comments: ${animal.comments}`;
 
-    const animalSound = document.createElement("p");
-    animalSound.textContent = `Sonido: ${animal.soundFile}`;
+    // const animalSound = document.createElement("p");
+    // animalSound.textContent = `Sound: ${animal.soundFile}`;
 
     infoCard.appendChild(animalName);
     infoCard.appendChild(animalImage);
     infoCard.appendChild(animalAge);
     infoCard.appendChild(animalComments);
+    // infoCard.appendChild(animalSound);
         
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "Close";
