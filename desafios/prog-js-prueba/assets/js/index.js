@@ -114,43 +114,73 @@ const renderAnimalsInArray = () => {
   const animalesDiv = document.getElementById("Animales");
   animalesDiv.innerHTML = "";
 
+  const availableWidth = animalesDiv.clientWidth;
+  const cardWidth = 250; 
+  const cardMargin = 10; 
+
+  const maxCardsPerRow = Math.floor(availableWidth / (cardWidth + cardMargin));
+
+  const totalCards = animalArray.length;
+  const totalRows = Math.ceil(totalCards / maxCardsPerRow);
+
   let rowDiv;
-  animalArray.forEach((animal, index) => {
-    if (index % 3 === 0) {
-      rowDiv = document.createElement("div");
-      rowDiv.classList.add("d-flex", "justify-content-between");
-      animalesDiv.appendChild(rowDiv);
+  for (let i = 0; i < totalRows; i++) {
+    rowDiv = document.createElement("div");
+    rowDiv.classList.add("d-flex", "justify-content-between");
+    animalesDiv.appendChild(rowDiv);
+
+    const cardsInThisRow = Math.min(
+      maxCardsPerRow,
+      totalCards - i * maxCardsPerRow
+    );
+    for (let j = 0; j < cardsInThisRow; j++) {
+      const animal = animalArray[i * maxCardsPerRow + j];
+      const animalCard = createAnimalCard(animal);
+      rowDiv.appendChild(animalCard);
     }
+  }
 
-    const animalCard = document.createElement("div");
-    animalCard.classList.add("animal-card", "p-3", "bg-light");
+  resetFormFields();
+};
 
-    const animalImg = document.createElement("img");
-    animalImg.src = animal.img;
-    animalImg.alt = `${animal.name} Preview`;
-    animalImg.classList.add("animal-image");
 
-    const playSoundIcon = document.createElement("i");
-    playSoundIcon.classList.add("fas", "fa-volume-up", "animal-sound-icon");
-    playSoundIcon.addEventListener("click", () => {
-      const audioPlayer = document.getElementById("player");
-      audioPlayer.src = animal.soundFile;
-      audioPlayer.play();
-    });
+const createAnimalCard = (animal) => {
+  const animalCard = document.createElement("div");
+  animalCard.classList.add("animal-card", "p-3", "bg-light");
 
-    animalCard.addEventListener("click", () => {
-      showModal(animal);
-    });
+  const animalImg = document.createElement("img");
+  animalImg.src = animal.img;
+  animalImg.alt = `${animal.name} Preview`;
+  animalImg.classList.add("animal-image");
 
-    animalCard.appendChild(animalImg);
-    animalCard.appendChild(playSoundIcon);
-    rowDiv.appendChild(animalCard);
+  const playSoundIcon = createPlaySoundIcon(animal);
+
+  animalCard.addEventListener("click", () => {
+    showModal(animal);
   });
-  
+
+  animalCard.appendChild(animalImg);
+  animalCard.appendChild(playSoundIcon);
+
+  return animalCard;
+};
+
+const createPlaySoundIcon = (animal) => {
+  const playSoundIcon = document.createElement("i");
+  playSoundIcon.classList.add("fas", "fa-volume-up", "animal-sound-icon");
+  playSoundIcon.addEventListener("click", () => {
+    const audioPlayer = document.getElementById("player");
+    audioPlayer.src = animal.soundFile;
+    audioPlayer.play();
+  });
+  return playSoundIcon;
+};
+
+const resetFormFields = () => {
   animalSelect.value = "Seleccione un animal";
   animalAge.value = "Seleccione un rango de años";
   comments.value = "";
-  preview.innerHTML = ""; 
+  preview.innerHTML = "";
 };
 
 
@@ -183,9 +213,7 @@ const showModal = (animal) => {
     infoCard.appendChild(animalImage);
     infoCard.appendChild(animalAge);
     infoCard.appendChild(animalComments);
-    // infoCard.appendChild(animalSound);
-
-    
+        
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "Close";
     closeBtn.classList.add("btn", "btn-secondary");
