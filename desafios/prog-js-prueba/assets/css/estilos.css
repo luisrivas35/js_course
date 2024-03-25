@@ -15,15 +15,17 @@ body {
 /* Formulario */
 
 #preview {
-  height: 200px;
+  height: 200px; 
   background-image: url(../imgs/lion.svg);
   background-position: top;
   background-size: contain;
   background-repeat: no-repeat;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
 }
 
-
-/* Tabla de Participantes */
+/* Tabla de animales */
 
 #Animales {
   height: 100%;
@@ -43,8 +45,70 @@ body {
 }
 
 /* Modal */
-
 .modal-dialog{
     max-width: 85% !important;
 }
 
+.animal-card {
+  width: calc(40% - 20px); 
+  max-width: 200px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+.animal-card img {
+  width: 100%; 
+  height: auto; 
+}
+.animal-card .play-icon {
+  display: none; 
+}
+
+.animal-card:hover .play-icon {
+  display: inline-block; 
+}
+
+.animal-image {
+  width: 100%;
+  height: auto;
+  max-height: 120px; 
+  margin-bottom: 10px;
+}
+
+.animal-sound-icon {
+  font-size: 24px;
+  color: blue;
+  cursor: pointer;
+}
+
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.info-card {
+  margin-bottom: 20px;
+  color: #f9f2f2; 
+}
+
+.info-card h5 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.info-card p {
+  margin-bottom: 5px;
+}
