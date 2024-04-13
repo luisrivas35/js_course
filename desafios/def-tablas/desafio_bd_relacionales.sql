@@ -49,6 +49,8 @@ LEFT JOIN peliculas_tags pt ON p.id = pt.id_pelicula
 GROUP BY p.id
 order by p.id;
 
+
+
 DROP TABLE IF EXISTS respuestas;
 DROP TABLE IF EXISTS preguntas;
 DROP TABLE IF EXISTS usuarios;
@@ -70,7 +72,7 @@ CREATE TABLE respuestas (
     respuesta VARCHAR(255),
     usuario_id int,
     pregunta_id int,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (pregunta_id) REFERENCES preguntas(id)
 );
 
@@ -116,18 +118,27 @@ JOIN respuestas r ON p.id = r.pregunta_id
 WHERE r.respuesta = p.respuesta
 GROUP BY p.id, p.pregunta, p.respuesta;
 
+
 ALTER TABLE respuestas DROP CONSTRAINT IF EXISTS respuestas_usuario_id_fkey;
 
 ALTER TABLE respuestas ADD CONSTRAINT respuestas_usuario_id_fkey FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE;
 
 DELETE FROM usuarios WHERE id = 1;
 
+select *
+from usuarios;
+
 ALTER TABLE usuarios
 ADD CONSTRAINT edad_mayor_que_18 CHECK (edad >= 18);
 
--- INSERT INTO usuarios (id, nombre, edad) VALUES (6, 'Usuario 6', 16);
+--INSERT INTO usuarios (id, nombre, edad) VALUES (6, 'Usuario 6', 16);
 
 
 ALTER TABLE usuarios
 ADD COLUMN email VARCHAR(255) UNIQUE;
+
+
+select *
+from usuarios;
+
 
