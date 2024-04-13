@@ -40,3 +40,4 @@ FROM public.Peliculas p;
 -- 8- Consultar cuál es la longitud más grande entre todos los títulos de las películas:
 SELECT MAX(LENGTH(p.Pelicula)) AS longitud_maxima
 FROM public.Peliculas p;
+
