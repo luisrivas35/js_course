@@ -33,7 +33,7 @@ npm i -D nodemon
   },
 ```
 Execute script
-````sh
+```sh
 npm start
 npm run watch
 npm run dev
