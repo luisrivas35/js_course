@@ -32,7 +32,7 @@ const validateUsuario = (req, res, next) => {
 };
 
 
-app.get("/", (req, res) => {
+app.get("/abracadabra", (req, res) => {
   res.sendFile(join(__dirname, "index.html"));
 });
 
