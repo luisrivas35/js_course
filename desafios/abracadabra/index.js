@@ -5,7 +5,7 @@ import { dirname, join } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 const usuarios = [
   "juan",
@@ -63,6 +63,6 @@ app.use((err, req, res, next) => {
   res.status(500).send("Algo salió muy mal revisa ahi...");
 });
 
-app.listen(port, () => {
-  console.log(`Servidor Express escuchando en el puerto ${port}`);
+app.listen(PORT, () => {
+  console.log(`Servidor Express escuchando en el puerto ${PORT}`);
 });
