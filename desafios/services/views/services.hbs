@@ -1,18 +1,14 @@
 <h1>Services</h1>
 
 <div class="row">
-    {{#if services}}
-        <ul>
-            {{#each services}}
-                <li>
-                    <h2>{{ this.name }}</h2>
-                    <p>{{ this.description }}</p>
-                    <a href="{{ this.url }}">Read more</a>
-                </li>
-            {{/each}}
-        </ul>
-    {{else}}
-        <p>No services here</p>
-    {{/if}}
+  {{#each services as |service|}}
+    <div class="card">
+      
+      <div class="card-body">
+        <h5 class="card-title">{{ service.name}}</h5>
+        
+        <a href="{{ service.url}}" class="btn btn-primary">More Info</a>
+      </div>
+    </div>
+  {{/each}}
 </div>
-
