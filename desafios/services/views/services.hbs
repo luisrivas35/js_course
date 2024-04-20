@@ -1,0 +1,18 @@
+<h1>Services</h1>
+
+<div class="row">
+    {{#if services}}
+        <ul>
+            {{#each services}}
+                <li>
+                    <h2>{{ this.name }}</h2>
+                    <p>{{ this.description }}</p>
+                    <a href="{{ this.url }}">Read more</a>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No services here</p>
+    {{/if}}
+</div>
+
