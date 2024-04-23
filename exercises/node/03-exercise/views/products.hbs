@@ -1,0 +1,36 @@
+<h1>Productos</h1>
+
+{{#if success}}
+<div class="alert alert-success">
+    {{success}}
+</div>
+{{/if}}
+
+{{#if error}}
+<div class="alert alert-danger">
+    {{error}}
+</div>
+{{/if}}
+
+<a href="/products?order=asc" class="btn btn-dark">ASC</a>
+<a href="/products?order=desc" class="btn btn-dark">DESC</a>
+
+<form action="/products/add" method="POST">
+    <input name="title" type="text" placeholder="Ingrese nombre del producto">
+    <input name="price" type="text" placeholder="Ingrese precio del producto">
+    <button type="submit">Agregar producto</button>
+</form>
+
+<ul>
+    {{#if products}}
+        {{#each products}}
+            <li>id:{{id}} {{name}} - ${{price}}
+                <a href="/products/delete/{{id}}">Eliminar</a>
+                <a href="/products/update/{{id}}">Actualizar</a>
+                
+            </li>
+        {{/each}}
+    {{else}}
+        <p>No hay productos</p>
+    {{/if}}
+</ul>

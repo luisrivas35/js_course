@@ -1,0 +1,13 @@
+<h1>Actualizar Producto</h1>
+
+{{#if error}}
+<div class="alert alert-danger">
+    {{error}}
+</div>
+{{/if}}
+
+<form action="/products/update/{{id}}" method="POST">
+    <input name="title" type="text" placeholder="Nuevo nombre del producto">
+    <input name="price" type="text" placeholder="Nuevo precio del producto">
+    <button type="submit">Actualizar</button>
+</form>
