@@ -1,51 +1,33 @@
-import chalk from "chalk";
-import { v4 as uuidv4 } from "uuid";
-import moment from "moment";
-import _ from "lodash";
 import axios from "axios";
+import express from "express";
+import _ from "lodash";
 
-moment.locale("es");
+const app = express();
 
-console.log(chalk.blue("Hello world!"));
-console.log(chalk.bgGray.white("Hello world!"));
-
-const id = uuidv4().slice(0, 6);
-console.log(chalk.bgCyan.white(id));
-
-console.log(moment().format("LL"));
-
-console.log(_.random(1, 5));
-
-const numeros = [1, 2, 3, 4, 5, 6];
-
-const result = _.partition(numeros, (n) => n % 2);
-const impares = result[0];
-const pares = result[1];
-
-console.log(impares);
-console.log(pares);
-
-const getProducts = async () => {
+const products = [];
+app.get("/", async (req, res) => {
   try {
-    const { data } = await axios.get("https://fakestoreapi.com/products");
-    // console.log(data)
+    const randomNumber = _.random(1, 20);
+    const { data } = await axios.get(
+      "https://fakestoreapi.com/products/" + randomNumber
+    );
+
+    const product = {
+      id: data.id,
+      title: data.title,
+      price: data.price,
+    };
+
+    products.push(product);
+
+    const items = _.partition(products, (item) => item.price > 10);
+
+    return res.json(items);
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ ok: false });
   }
-};
+});
 
-getProducts();
-
-const login = async () => {
-  try {
-    const { data } = axios.post("https://fakestoreapi.com/auth/login", {
-      username: "mor_2314",
-      password: "83r5^_",
-    });
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-login();
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log("Server andando..."));
