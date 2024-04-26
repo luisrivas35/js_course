@@ -1,14 +1,14 @@
 {
   "type": "module",
-  "name": "09-exercise",
+  "name": "desafio-citas-medicas",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Luis Rivas",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
