@@ -1,0 +1,64 @@
+<div class="container mt-5">
+  <h1>Users by Sex</h1>
+
+  <div class="mb-5">
+    <h2>Males</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Registry</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each males}}
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.firstName}}</td>
+              <td>{{this.lastName}}</td>
+              <td>{{this.gender}}</td>
+              <td>{{this.age}}</td>
+              <td>{{this.timestamp}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Tabla para usuarios femeninos -->
+  <div>
+    <h2>Females</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Registry</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each females}}
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.firstName}}</td>
+              <td>{{this.lastName}}</td>
+              <td>{{this.gender}}</td>
+              <td>{{this.age}}</td>
+              <td>{{this.timestamp}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
