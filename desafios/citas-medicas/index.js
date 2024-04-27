@@ -1,6 +1,9 @@
 import express from "express";
+import "dotenv/config";
 import { engine } from "express-handlebars";
 import path from "path";
+import nodemailer from "nodemailer";
+import Jimp from "jimp";
 import _ from "lodash";
 import chalk from "chalk";
 import { v4 as uuidv4 } from "uuid";
