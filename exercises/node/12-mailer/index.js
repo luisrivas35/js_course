@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import { engine } from "express-handlebars";
 import path from "path";
-import nodemailer from "nodemailer";
+// import nodemailer from "nodemailer";
 import Jimp from "jimp";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
