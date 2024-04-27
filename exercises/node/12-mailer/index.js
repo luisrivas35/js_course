@@ -42,9 +42,9 @@ app.get("/image", async (req, res) => {
     const imagePath = path.join(__dirname, "public", "images", fileName);
     await image.writeAsync(imagePath);
     
-    const imageUrlToShow = `/images/${fileName}`;
-    
-    res.render("image-view", { imageUrlToShow });
+    const imageToShow = `/images/${fileName}`;
+
+    res.render("image-view", { imageToShow });
   } catch (error) {
     console.error("Error capturing image:", error);
     return res
@@ -53,34 +53,6 @@ app.get("/image", async (req, res) => {
   }
 });
 
-
-
-app.get("/email/send", async (req, res) => {
-  try {
-    const transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transport.sendMail({
-      from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>',
-      to: "bar@example.com, baz@example.com",
-      subject: "Hello ✔",
-      html: "<b>Hello world?</b>",
-    });
-
-    return res.json({ ok: true });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    return res
-      .status(500)
-      .json({ ok: false, error: "Error sending email. Please try again." });
-  }
-});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
