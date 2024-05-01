@@ -1,0 +1,26 @@
+<div class="container mt-5">
+        <h1>Registered Users</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {{#each sports}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.price}}</td>
+                        
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>

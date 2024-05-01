@@ -1,39 +1,59 @@
 import express from "express";
+import { engine } from "express-handlebars";
 import path from "path";
-import { readFile, writeFile } from "fs/promises";
+import moment from "moment";
+import axios from "axios";
+import fs from "fs";
+import { sports } from "./data/club.data.js";
 
+moment.locale("es");
 
-// const __dirname = import.meta.dirname;
-const __dirname = path.resolve();
 const app = express();
+const __dirname = path.resolve();
+const sportsFilePath = path.join(__dirname, "sports.json");
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.engine(".hbs", engine({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
+app.set("views", path.join(__dirname, "views"));
+app.set("layoutsDir", path.join(__dirname, "layouts"));
+app.set("partialsDir", path.join(__dirname, "partials"));
+app.set("assets", path.join(__dirname, "assets"));
 
+app.post("/add-sport", (req, res) => {
+  const { sportName, precio } = req.body;
+  const newSport = {
+    sportName,
+    precio,
+  };
 
-app.post("/crear", async (req, res) => {
   try {
-    const { archivo, contenido } = req.body;
-    const filePath = path.join(__dirname, "archivos", `${archivo}.txt`); 
+    const existingSports = [];
+    // Check if sports.json file exists
+    if (fs.existsSync(sportsFilePath)) {
+      // Read existing sports data from sports.json
+      existingSports = require(sportsFilePath);
+    }
 
-    await writeFile(filePath, contenido);
-    console.log(`Archivo creado en: ${filePath}`);
-    return res.json({ ok: true, msg: "Archivo creado exitosamente" });
-  } catch (error) {
-    console.error("Error al crear el archivo:", error);
-    return res
-      .status(500)
-      .json({ ok: false, msg: "Error al crear el archivo" });
+    // Add the new sport object to the array
+    existingSports.push(newSport);
+
+    // Write the updated array back to sports.json
+    fs.writeFileSync(sportsFilePath, JSON.stringify(existingSports));
+
+    res.send("Sport added successfully!");
+  } catch (err) {
+    console.error("Error writing to file:", err);
+    res.status(500).send("Error writing to file");
   }
 });
 
 app.get("/leer/:nombreArchivo", async (req, res) => {
   try {
     const { nombreArchivo } = req.params;
-    const filePath = path.join(__dirname, "archivos", `${nombreArchivo}.txt`); 
+    const filePath = path.join(__dirname, "archivos", `${nombreArchivo}.txt`);
     const fileContent = await readFile(filePath, "utf8");
     return res.send(fileContent);
   } catch (error) {
@@ -41,8 +61,6 @@ app.get("/leer/:nombreArchivo", async (req, res) => {
     return res.status(404).json({ ok: false, msg: "Archivo no encontrado" });
   }
 });
-
-
 
 // app.put("/renombrar", async (req, res) => {
 //   try {
