@@ -1,5 +1,5 @@
-const sports = [
+export const sports = [
   
 ];
 
-export default sports;
+
