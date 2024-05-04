@@ -1,17 +1,15 @@
 import {Sport} from '../models/sport.model.js';
 
-
 export const getAllSports = async (req, res) => {
+  console.log(req.query);
   try {
-    const sports = await Sport.findAll();
-    console.log(sports); 
-    return res.render("list", { sports }); 
+    const sports = await Sport.findAll()
+    return res.json(sports);
   } catch (err) {
-    console.error(err); 
-    return res.status(500).json({ ok: false, error: err.message }); 
+    console.log(err)
+    return res.status(500).json({ok: false});
   }
 };
-
 
 export const getSport = async (req, res) => {
   const {id} = req.params;
@@ -37,4 +35,3 @@ export const deleteSport = async (req, res) => {
   const filteredSports = await Sport.remove(id);
   res.json(filteredSports);
 };
-

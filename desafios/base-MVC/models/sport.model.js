@@ -3,8 +3,8 @@ import { readFile, writeFile } from 'fs/promises';
 import { nanoid } from 'nanoid';
 
 
-const __dirname = import.meta.dirname
-const filePath = path.join(__dirname, "../data/sports.json")
+const _dirname = import.meta.dirname
+const filePath = path.join(_dirname, "../data/sports.json")
 
 const add = async (name, price) => {
     const sports = await findAll();
