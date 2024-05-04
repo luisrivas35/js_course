@@ -4,20 +4,32 @@ import {
   getSport,
   createSport,
   modifySport,
-  deleteSport  
+  deleteSport,
+  allJson,
+  addSport,
+  editSport,
+  removeSport
 } from "../controllers/sport.controller.js";
 
 const router = Router();
 
 router.get("/sports", getAllSports);
 
-router.get("/sports/:id", getSport);
+router.get("/json", allJson);
 
-router.post("/sports", createSport);
+router.get("/sportid/:id", getSport);
 
-router.put("/sports/:id", modifySport);
+router.get("/createSport", createSport);
 
-router.delete("/sports/:id", deleteSport);
+router.post("/add", addSport);
+
+router.get("/editSport", editSport);
+
+router.put("/edit/:id", modifySport);
+
+router.get("/removeSport", removeSport);
+
+router.delete("/deleteSport/:id", deleteSport);
 
 router.get("/", (req, res) => {
     res.render("home")

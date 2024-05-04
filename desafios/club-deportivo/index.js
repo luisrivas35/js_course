@@ -2,8 +2,12 @@
 import express from "express";
 import { engine } from "express-handlebars";
 import sportRoutes from "./routes/sport.routes.js";
+import path from "path";
 
 const app = express();
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
