@@ -8,10 +8,9 @@ export const getAllSports = async (req, res) => {
     return res.render("list", { sports }); 
   } catch (err) {
     console.error(err); 
-    return res.status(500).json({ ok: false, error: err.message }); 
+    return res.status(500).render("error", { err }); 
   }
 };
-
 
 export const getSport = async (req, res) => {
   const {id} = req.params;
