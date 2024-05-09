@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS students;
+
+CREATE TABLE IF NOT EXISTS students (
+    id SERIAL PRIMARY KEY,
+    Rut VARCHAR(20) UNIQUE,
+    Nombre VARCHAR(255),
+    Curso VARCHAR(50),
+    Nivel VARCHAR(50)
+);
