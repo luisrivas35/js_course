@@ -11,7 +11,7 @@ export const pool = new Pool({
 
 try {
   const time = await pool.query("SELECT NOW()");
-  console.log("db ready to connect "+ time.rows[0].now);
+  console.log("db ready to connect at "+ time.rows[0].now);
 } catch (error) {
   console.log(error);
 }
