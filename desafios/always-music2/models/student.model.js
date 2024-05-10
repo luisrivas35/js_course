@@ -5,7 +5,7 @@ const findAll = async () => {
 
   const query = {
     text: "SELECT * FROM students",
-    // rowMode: "array"
+    rowMode: "array"
   };
   const { rows } = await pool.query(query);
   return rows;
