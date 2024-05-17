@@ -100,11 +100,11 @@ const eliminarLibro = async (id) => {
   }
 };
 
-// Function to handle form submission
+
 const submitEditarLibro = async (event) => {
   try {
     event.preventDefault();
-    const id = event.target.dataset.id; // Get the ID from the form
+    const id = event.target.dataset.id; // aca se toma el id desde la forma
     await axios.put(URL_DOMAIN + "/libros/" + id, {
       nombre: event.target.nombre.value,
       autor: event.target.autor.value,
