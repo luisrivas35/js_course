@@ -1,8 +1,9 @@
 const allSongs = document.querySelector("#allSongs");
 const formAddSong = document.querySelector("#formAddSong");
 const formEditSong = document.querySelector("#formEditSong");
-const songModal = document.querySelector("#songModal");
-const myModal = new bootstrap.Modal(songModal);
+const exampleModal = document.querySelector("#songModal");
+const myModal = new bootstrap.Modal(exampleModal);
+
 const URL_DOMAIN = "http://localhost:3000";
 
 formAddSong.addEventListener("submit", async (e) => {
@@ -37,14 +38,14 @@ const getSongs = async () => {
     thead.classList.add("thead-dark");
     thead.style.color = "white";
     thead.innerHTML = `
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Titulo</th>
-        <th scope="col">Artista</th>
-        <th scope="col">Tono</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    `;
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Artista</th>
+                <th scope="col">Tono</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        `;
 
     const tbody = document.createElement("tbody");
     tbody.style.color = "white";
@@ -52,15 +53,15 @@ const getSongs = async () => {
     songs.forEach((song) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${song.id}</td>
-        <td>${song.titulo}</td>
-        <td>${song.artista}</td>
-        <td>${song.tono}</td>
-        <td>
-          <button onclick="editSong('${song.id}')" class="btn btn-warning btn-sm">Edit</button>
-          <button onclick="deleteSong('${song.id}')" class="btn btn-danger btn-sm">Delete</button>
-        </td>
-      `;
+                <td>${song.id}</td>
+                <td>${song.titulo}</td>
+                <td>${song.artista}</td>
+                <td>${song.tono}</td>
+                <td>
+                   <button onclick="editSong('${song.id}')" class="btn btn-warning btn-sm">Editar</button>
+                   <button onclick="deleteSong('${song.id}')" class="btn btn-danger btn-sm">Eliminar</button>
+                </td>
+            `;
       tbody.appendChild(row);
     });
 
@@ -75,16 +76,27 @@ const getSongs = async () => {
 
 getSongs();
 
+
+const deleteSong = async (id) => {
+  try {
+    await axios.delete(`${URL_DOMAIN}/cancion/${id}`);
+    getSongs();
+  } catch (error) {
+    console.log(error);
+    alert(error?.response?.data?.msg);
+  }
+};
+
 const submitEditSong = async (e) => {
   try {
     e.preventDefault();
-    const id = formEditSong.dataset.id;
+    const id = e.target.dataset.id; 
     await axios.put(URL_DOMAIN + "/cancion/" + id, {
       titulo: e.target.titulo.value,
       artista: e.target.artista.value,
       tono: e.target.tono.value,
     });
-    formEditSong.reset();
+    e.target.reset();
     getSongs();
     myModal.hide();
   } catch (error) {
@@ -105,16 +117,6 @@ const editSong = async (id) => {
 
     myModal.show();
   } catch (error) {
-    alert(error?.response?.data?.msg);
-  }
-};
-
-const deleteSong = async (id) => {
-  try {
-    await axios.delete(`${URL_DOMAIN}/cancion/${id}`);
-    getSongs();
-  } catch (error) {
-    console.log(error);
     alert(error?.response?.data?.msg);
   }
 };

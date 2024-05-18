@@ -22,7 +22,7 @@ export const getSong = async (req, res) => {
         if (!song) {
             return res.status(404).json({ ok: false, msg: '404' })
         }
-        return res.json(songs)
+        return res.json(song)
     } catch (error) {
         console.log(error)
         const { code, msg } = handleError(error)
