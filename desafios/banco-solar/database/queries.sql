@@ -22,7 +22,7 @@ CREATE TABLE transferencias (
     emisor INT,
     receptor INT,
     monto FLOAT,
-    fecha DATE DEFAULT CURRENT_DATE,
+    fecha DATE,
     FOREIGN KEY (emisor) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (receptor) REFERENCES usuarios(id) ON DELETE CASCADE
 );
@@ -40,8 +40,11 @@ SET balance = balance + 500
 WHERE id = 2;
 
 -- Insert into transferencias
-INSERT INTO transferencias (emisor, receptor, monto) VALUES 
-(1, 2, 500);
+INSERT INTO transferencias (emisor, receptor, monto, fecha) VALUES 
+(1, 2, 500, '05/10/2024'),
+(2, 1, 100, '05/15/2024'),
+(3, 1, 100, '05/16/2024'),
+(4, 2, 100, '05/18/2024');
 
 COMMIT;
 
