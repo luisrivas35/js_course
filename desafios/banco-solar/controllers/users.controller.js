@@ -19,7 +19,7 @@ export const createUser = async (req, res) => {
     const { nombre, balance } = req.body;
 
     if (!nombre || !balance) {
-      return res.status(400).json({ ok: false, msg: "campos obligatorios" });
+      return res.status(400).json({ ok: false, msg: "campos requeridos" });
     }
 
     const newUser = {
@@ -59,13 +59,13 @@ export const updateUser = async (req, res) => {
     if (!id) {
       return res
         .status(400)
-        .json({ ok: false, msg: "ID parameter is missing" });
+        .json({ ok: false, msg: "ID no se encuentra" });
     }
     
     const user = await User.update({ id, nombre, balance });
 
     if (!user) {
-      return res.status(404).json({ ok: false, msg: "User not found" });
+      return res.status(404).json({ ok: false, msg: "Usuario no encontardo" });
     }
 
     return res.json(user);
@@ -83,7 +83,7 @@ export const getUserByName = async (req, res) => {
     res.json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ msg: "Error retrieving user" });
+    res.status(500).json({ msg: "Error .... Usuario no se encuentra" });
   }
 };
 

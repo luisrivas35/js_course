@@ -21,7 +21,7 @@ export const createTransfer = async (req, res) => {
     const { emisor, receptor, monto } = req.body;
 
     if (!emisor || !receptor || !monto) {
-      return res.status(400).json({ ok: false, msg: "Campos obligatorios" });
+      return res.status(400).json({ ok: false, msg: "Campos requeridos" });
     }
 
     const emisorUser = await User.getUserById(emisor);
