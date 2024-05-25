@@ -4,9 +4,11 @@ import {
   getAllTransfers,
 } from "../controllers/transfer.controller.js";
 
+
 const router = Router();
 
-router.get("/transferencias", getAllTransfers);
-router.post("/transferencia", createTransfer);
+
+router.get("/", getAllTransfers);
+router.post("/", createTransfer);
 
 export default router;

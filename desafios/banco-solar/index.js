@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use("/usuarios", usersRoutes);
-app.use("/", transferRoutes);
+app.use("/transferencias", transferRoutes);
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("public/index.html"));

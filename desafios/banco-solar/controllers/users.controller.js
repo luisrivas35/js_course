@@ -41,7 +41,7 @@ export const removeUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.remove(id);
-    return res.json(song);
+    return res.json(user);
   } catch (error) {
     console.log(error);
     const { code, msg } = handleError(error);
@@ -50,20 +50,42 @@ export const removeUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  console.log(req.params);
+  console.log(req.params); 
   console.log(req.body);
   try {
-    const { id } = req.params;
+    const { id } = req.params; 
     const { nombre, balance } = req.body;
-    const user = await User.update({
-      id,
-      nombre,
-      balance,
-    });
-    return res.json(song);
+   
+    if (!id) {
+      return res
+        .status(400)
+        .json({ ok: false, msg: "ID parameter is missing" });
+    }
+    
+    const user = await User.update({ id, nombre, balance });
+
+    if (!user) {
+      return res.status(404).json({ ok: false, msg: "User not found" });
+    }
+
+    return res.json(user);
   } catch (error) {
     console.log(error);
     const { code, msg } = handleError(error);
     return res.status(code).json({ ok: false, msg });
   }
 };
+
+export const getUserByName = async (req, res) => {
+  const { name } = req.params;
+  try {
+    const user = await User.getUserByName(name);
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Error retrieving user" });
+  }
+};
+
+
+
