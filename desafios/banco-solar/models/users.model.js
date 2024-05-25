@@ -65,7 +65,7 @@ const getUserByName = async (name) => {
   };
   const { rows } = await pool.query(query);
   if (rows.length === 0) {
-    throw new Error("User not found");
+    throw new Error("Cliente no encontrado");
   }
   return rows[0];
 };
@@ -77,7 +77,7 @@ const getUserById = async (id) => {
   };
   const { rows } = await pool.query(query);
   if (rows.length === 0) {
-    throw new Error("User not found");
+    throw new Error("Cliente no encontrado");
   }
   return rows[0];
 };

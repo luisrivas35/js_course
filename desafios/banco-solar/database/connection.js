@@ -10,7 +10,7 @@ export const pool = new Pool({
 
 try {
     const time = await pool.query('SELECT NOW()')
-    console.log('db esta super conectada!' + time.rows[0].now)
+    console.log('Esta DB esta super conectada! ' + 'El dia de hoy es: ' + time.rows[0].now)
 } catch (error) {
     console.log(error)
 }

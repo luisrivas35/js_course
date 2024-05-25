@@ -32,7 +32,7 @@ const create = async ({ emisor, receptor, monto }) => {
     const emisorBalance = balanceRows[0]?.balance;
 
     if (emisorBalance < monto) {
-      throw new Error("Insufficient balance");
+      throw new Error("Balance Insuficiente");
     }
 
     await client.query(
