@@ -23,15 +23,15 @@ export const getAll = async (req, res) => {
     const allCharacters = await getAllCharacters();
     
     if (allCharacters.length > 0) {
-      const characterInfos = allCharacters.map(character => ({
+      const characterInfo = allCharacters.map(character => ({
         id: character.id,
         nombre: character.name,
         estado: character.status,
         especie: character.species,
         genero: character.gender,
       }));
-      console.log(characterInfos);
-      return res.json(characterInfos);
+      console.log(characterInfo);
+      return res.json(characterInfo);
     } else {
       return res.status(404).json({ message: "No characters found" });
     }
