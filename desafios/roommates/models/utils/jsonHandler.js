@@ -30,12 +30,12 @@ export const readGastos = async () => {
     const data = await fs.promises.readFile("data/gastos.json", "utf-8");
     if (!data) {
       console.error("JSON file is empty.");
-      return { gastos: [] }; // Return an empty array if the file is empty
+      return { gastos: [] }; 
     }
     return JSON.parse(data);
   } catch (error) {
     console.error("Error reading JSON file:", error);
-    return { gastos: [] }; // Return an empty array if file reading fails
+    return { gastos: [] }; 
   }
 };
 

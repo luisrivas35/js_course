@@ -1,1 +1,0 @@
-const newRoommate = document.querySelector("#")

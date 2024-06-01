@@ -1,36 +1,18 @@
 {
   "roommates": [
     {
-      "id": "f9c60db1-3cce-45aa-9b38-f9ebeca86611",
-      "name": "Alma Rohmann"
+      "id": "266f7aaf-a76f-4632-bdf6-76f5aeabda71",
+      "name": "Ross Garza",
+      "debe": 0,
+      "recibe": 0,
+      "email": "ross.garza@example.com"
     },
     {
-      "id": "016e8979-4e8b-4fc2-8c1c-3f595333d039",
-      "name": "Luna Myreng"
-    },
-    {
-      "id": "d1ee652a-0b5d-4cbe-a518-4fef7c68d41c",
-      "name": "Sara Møller"
-    },
-    {
-      "id": "3b668bfb-9cca-441d-8543-7fcbd99bf1fc",
-      "name": "Nerea Delgado"
-    },
-    {
-      "id": "c64069bc-3701-4c5b-b219-1531f7916c58",
-      "name": "Heinfried Pfau"
-    },
-    {
-      "id": "8c9a9c7d-bb35-4e66-a835-c2b611fc503f",
-      "name": "Adem Körmükçü"
-    },
-    {
-      "id": "539d8c12-04bf-4272-8e1d-e4754d0f4ae3",
-      "name": "Terrence Tucker"
-    },
-    {
-      "id": "f20de7b5-8069-4d7e-884c-56145471292f",
-      "name": "Giray Ertürk"
+      "id": "d671285a-9fd1-425a-892f-f694239610a6",
+      "name": "Soham Duncan",
+      "debe": 0,
+      "recibe": 0,
+      "email": "soham.duncan@example.com"
     }
   ]
 }

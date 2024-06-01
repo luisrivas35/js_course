@@ -1,6 +1,6 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { readRoommate, writeRoommate } from "../utils/jsonHandler.js";
+import { readRoommate, writeRoommate } from "../models/utils/jsonHandler.js";
 
 export const newRoommate = async (req, res) => {
   try {
@@ -9,6 +9,9 @@ export const newRoommate = async (req, res) => {
     const newRoommate = {
       id: uuidv4(),
       name: `${roommateData.name.first} ${roommateData.name.last}`,
+      debe: 0,
+      recibe: 0,
+      email: roommateData.email,
     };
 
     const data = await readRoommate();
@@ -27,7 +30,7 @@ export const getAllRoommates = async (req, res) => {
   try {
     const data = await readRoommate();
     const roommates = data.roommates || [];
-    res.status(200).json(roommates);
+    return res.status(200).json(roommates);
   } catch (error) {
     console.error("Error retrieving roommates:", error);
     res.status(500).json({ error: "Failed to retrieve roommates" });

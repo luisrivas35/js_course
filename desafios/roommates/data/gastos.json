@@ -1,28 +1,10 @@
 {
   "gastos": [
     {
-      "id": "c1fee37d-56e4-4a58-84c6-818064a11e04",
-      "roommate": "Alma Rohmann",
+      "id": "29fdf97d-af86-4acf-b051-2b281116d79d",
+      "roommate": "Ross Garza",
       "descripcion": "Articulos de limpieza",
       "monto": 15000
-    },
-    {
-      "id": "d794afdd-8d84-4c3d-a80d-696252c56461",
-      "roommate": "Luna Myreng",
-      "descripcion": "Articulos de limpieza",
-      "monto": 15000
-    },
-    {
-      "id": "d2bdf814-4a8b-48ea-8709-9267b6e8ae33",
-      "roommate": "Sara Møller",
-      "descripcion": "mopas",
-      "monto": 3000
-    },
-    {
-      "id": "5fd12f3d-96d9-4768-9c84-ef15ae778994",
-      "roommate": "Nerea Delgado",
-      "descripcion": "balon de gas",
-      "monto": 26000
     }
   ]
 }
