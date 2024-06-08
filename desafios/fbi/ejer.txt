@@ -1,0 +1,85 @@
+en base a este html en el front:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FBI System</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+      <h1>&#128374; FBI System &#128374;</h1>
+    <div class="card bg-dark text-center">
+      <div class="card-body">
+        <form action="/SignIn">
+          <h1>&#128372;&#128372;&#128372;</h1>
+          <h5 class="card-title text-center">Ingrese sus credenciales</h5>
+          <div class="row d-flex align-items-center mb-1">
+            <div class="col-12">Email:</div>
+            <div class="col-7 m-auto"><input type="text" name="email" class="form-control" /></div>
+          </div>
+          <div class="row d-flex align-items-center">
+            <div class="col-12">Password:</div>
+            <div class="col-7 m-auto"><input type="text" name="password" class="form-control" /></div>
+          </div>
+          <button class="btn bg-light my-3">Ingresar &#128373;</button>
+        </form>
+      </div>
+    </div>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 60vh;
+      }
+    </style>
+  </body>
+</html>
+se necesita crear de forma modulada con la estructura:
+raiz index.js, controllers/agents.controller.js, routes/agents.route.js, public/index.html, data/agents.js que contiene un array con el email y el password en texto plano.
+mi index.js:
+import "dotenv/config";
+import express from "express";
+import agentRoutes from "./routes/agents.route.js";
+import path from "path";
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static("public"));
+
+app.use("/", agentRoutes);
+
+
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve("public/index.html"));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`FBI Security App esta atenta en el puerto: ${PORT}`);
+});
+
+debe cumplir con lo siguiente:
+1. Crear una ruta que autentique a un agente basado en sus credenciales y genere un token con sus datos.
+
+2. Al autenticar un agente, devolver un HTML que:
+a. Muestre el email del agente autorizado.
+b. Guarde un token en SessionStorage con un tiempo de expiración de 2 minutos.
+c. Disponibiliza un hiperenlace para redirigir al agente a una ruta restringida.
+3. Crear una ruta restringida que devuelva un mensaje de Bienvenida con el correo del agente autorizado, en caso contrario devolver un estado HTTP que indique que el usuario no está autorizado y un mensaje que menciona la descripción del error.
