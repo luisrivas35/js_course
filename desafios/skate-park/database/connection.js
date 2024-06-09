@@ -1,5 +1,8 @@
 import "dotenv/config";
-import { Pool } from "pg";
+import pkg from "pg"; 
+import fs from "fs";
+
+const { Pool } = pkg;
 
 const pool = new Pool({
   user: process.env.USER_DB,
@@ -8,8 +11,8 @@ const pool = new Pool({
   port: process.env.PORT_DB || 5432,
   database: process.env.DATABASE_NAME,
   ssl: {
-    rejectUnauthorized: true, 
-    ca: fs.readFileSync("/ca.pem"), 
+    rejectUnauthorized: true,
+    ca: fs.readFileSync("./ca.pem"),
   },
   allowExitOnIdle: true,
 });
@@ -23,4 +26,4 @@ const pool = new Pool({
   }
 })();
 
-export default pool; 
+export default pool;

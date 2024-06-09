@@ -1,14 +1,16 @@
 import { Router } from "express";
-// import {
-  
-// } from "../controllers/users.controller.js";
+import {
+  getAllSkaters,
+  createSkater,
+  registryForm,
+} from "../controllers/skaters.controller.js";
 
 const router = Router();
 
-router.get("/", );
-// router.get("/name/:name", getUserByName);
-// router.post("/", createUser);
-// router.delete("/:id", removeUser);
-// router.put("/:id", updateUser);
+
+
+router.get("/", getAllSkaters);
+router.post("/create", createSkater);
+router.get("/registry", registryForm);
 
 export default router;
