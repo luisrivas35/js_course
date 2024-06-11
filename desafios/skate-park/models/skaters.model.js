@@ -11,15 +11,20 @@ export const findAll = async () => {
 };
 
 export const findByEmail = async (email) => {
-  const query = {
-    text: "SELECT * FROM skaters WHERE email = $1",
-    values: [email],
-  };
-  const { rows } = await pool.query(query);
-  if (rows.length === 0) {
-    throw new Error("Registry not Found");
+  try {
+    const query = {
+      text: "SELECT email, password FROM skaters WHERE email = $1",
+      values: [email],
+    };
+    const { rows } = await pool.query(query);
+    if (rows.length === 0) {
+      throw new Error("Registry not Found");
+    }
+    return rows[0];
+  } catch (error) {
+    console.error("Error in findByEmail:", error);
+    throw error; // Re-throw the error to propagate it to the calling function
   }
-  return rows[0];
 };
 
 export const createSkater = async (skaterData) => {

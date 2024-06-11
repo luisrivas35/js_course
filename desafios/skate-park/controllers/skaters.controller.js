@@ -86,33 +86,42 @@ export const login = async (req, res) => {
 
 export const checkLogin = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(req.body)
+  console.log("Email:", email);
   try {
     const user = await findByEmail(email);
+    console.log("User found:", user);
 
     if (!user) {
       return res.status(404).send("User not found");
     }
 
+    // Log the retrieved user for debugging
+    console.log("User retrieved from database:", user);
+
     // Compare the provided password with the hashed password from the database
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (passwordMatch) {
       // Create a session token
-      const token = jwt.sign({ email: user.email }, SECRET_KEY, {
+      const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, {
         expiresIn: "1h",
       });
 
       // Store the token in the session
       req.session.token = token;
 
+      console.log("Login successful");
       res.status(200).send("Login successful");
     } else {
+      console.log("Incorrect password");
       res.status(401).send("Incorrect password");
     }
   } catch (err) {
-    res.status(500).send("An error occurred");
+    console.error("Error during login:", err);
+    res.status(500).send("An error occurred during login");
   }
 };
+
 
 
 
