@@ -10,6 +10,18 @@ export const findAll = async () => {
   }
 };
 
+export const findByEmail = async (email) => {
+  const query = {
+    text: "SELECT * FROM skaters WHERE email = $1",
+    values: [email],
+  };
+  const { rows } = await pool.query(query);
+  if (rows.length === 0) {
+    throw new Error("Registry not Found");
+  }
+  return rows[0];
+};
+
 export const createSkater = async (skaterData) => {
   const {
     email,
@@ -45,18 +57,6 @@ export const createSkater = async (skaterData) => {
 
 
 // Additional functions can be added here for other CRUD operations
-
-const findById = async (id) => {
-  try {
-    const [results] = await execute("SELECT * FROM skaters WHERE id = ?", [id]);
-    return results[0] || null; // Return the first row (if any) or null
-  } catch (err) {
-    console.error("Error fetching skater by ID:", err);
-    throw err; // Re-throw the error for handling at a higher level
-  }
-};
-
-
 const updateSkater = async (id, skaterData) => {
   const {
     email,
@@ -90,17 +90,17 @@ const deleteSkater = async (id) => {
   try {
     const sql = `DELETE FROM skaters WHERE id = ?`;
     const [results] = await execute(sql, [id]);
-    return results.affectedRows; // Return the number of affected rows (0 or 1)
+    return results.affectedRows; 
   } catch (err) {
     console.error("Error deleting skater:", err);
-    throw err; // Re-throw the error for handling at a higher level
+    throw err; 
   }
 };
 
 export default {
   findAll,
-  findById,
   createSkater,
   updateSkater,
   deleteSkater,
+  findByEmail,
 };
