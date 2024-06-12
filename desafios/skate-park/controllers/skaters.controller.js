@@ -3,7 +3,8 @@ import fs from "fs";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import "dotenv/config";
-import { findAll, findByEmail, createSkater as createSkaterModel } from "../models/skaters.model.js";
+import { findAll, findByEmail, createSkater as createSkaterModel,
+} from "../models/skaters.model.js";
 
 export const getAllSkaters = async (req, res) => {
   try {
@@ -86,32 +87,32 @@ export const login = async (req, res) => {
 
 export const checkLogin = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body)
-  console.log("Email:", email);
+    
   try {
     const user = await findByEmail(email);
-    console.log("User found:", user);
 
     if (!user) {
       return res.status(404).send("User not found");
     }
-
     // Log the retrieved user for debugging
     console.log("User retrieved from database:", user);
 
-    // Compare the provided password with the hashed password from the database
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (passwordMatch) {
-      // Create a session token
-      const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, {
-        expiresIn: "1h",
-      });
-
-      // Store the token in the session
+      const token = jwt.sign(
+        { email: user.email, is_admin: user.is_admin },
+        process.env.SECRET_KEY,
+        { expiresIn: "1h" }
+      );
       req.session.token = token;
 
       console.log("Login successful");
-      res.status(200).send("Login successful");
+      if(user.is_admin) {
+        return res.status(200).redirect("/admin");
+
+      }
+      return res.status(200).render("datos", { user });
+
     } else {
       console.log("Incorrect password");
       res.status(401).send("Incorrect password");
@@ -119,6 +120,28 @@ export const checkLogin = async (req, res) => {
   } catch (err) {
     console.error("Error during login:", err);
     res.status(500).send("An error occurred during login");
+  }
+};
+
+export const logAdmin = async (req, res) => {
+  
+  try {
+    const skaters = await findAll();
+    res.render("admin", { skaters });
+  } catch (err) {
+    console.error(err);
+    res.status(500).render("error", { err });
+  }
+};
+
+export const getProfile = async (req, res) => {
+  const email = req.session.email;
+  try {
+    const skater = await findByEmail(email);
+    res.render("datos", { skater });
+  } catch (err) {
+    console.error(err);
+    res.status(500).render("error", { err });
   }
 };
 

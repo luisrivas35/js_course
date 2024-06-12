@@ -13,7 +13,7 @@ export const findAll = async () => {
 export const findByEmail = async (email) => {
   try {
     const query = {
-      text: "SELECT email, password FROM skaters WHERE email = $1",
+      text: "SELECT * FROM skaters WHERE email = $1",
       values: [email],
     };
     const { rows } = await pool.query(query);
@@ -23,7 +23,7 @@ export const findByEmail = async (email) => {
     return rows[0];
   } catch (error) {
     console.error("Error in findByEmail:", error);
-    throw error; // Re-throw the error to propagate it to the calling function
+    throw error; 
   }
 };
 
@@ -91,11 +91,15 @@ const updateSkater = async (id, skaterData) => {
   }
 };
 
-const deleteSkater = async (id) => {
+const deleteSkater = async (email) => {
   try {
-    const sql = `DELETE FROM skaters WHERE id = ?`;
-    const [results] = await execute(sql, [id]);
-    return results.affectedRows; 
+    const query = {
+      text: "DELETE FROM skaters WHERE email = $11",
+      values: [email],
+    };
+    await pool.query(query);
+    
+    return ; 
   } catch (err) {
     console.error("Error deleting skater:", err);
     throw err; 

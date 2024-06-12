@@ -9,10 +9,11 @@ import path from "path";
 const app = express();
 
 const sessionMiddleware = session({
-  secret: "your_secret_key", // Change this to a long, random string
+  secret: process.env.SESSION_SECRET || "secret",
   resave: false,
   saveUninitialized: false,
 });
+
 
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "public")));
