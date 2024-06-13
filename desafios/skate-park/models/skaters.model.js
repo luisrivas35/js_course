@@ -89,10 +89,19 @@ export const deleteSkater = async (email) => {
   }
 };
 
+export const updateSkaterEstado = async (id, estado) => {
+  const query = {
+    text: "UPDATE skaters SET estado = $1 WHERE id = $2",
+    values: [estado, id],
+  };
+  await pool.query(query);
+};
+
 export default {
   findAll,
   createSkater,
   updateSkater,
   deleteSkater,
   findByEmail,
+  updateSkaterEstado,
 };

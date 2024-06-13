@@ -8,6 +8,7 @@ import {
   findByEmail,
   updateSkater,
   deleteSkater,
+  updateSkaterEstado,
   createSkater as createSkaterModel,
 } from "../models/skaters.model.js";
 
@@ -16,7 +17,6 @@ export const getAllSkaters = async (req, res) => {
     const skaters = await findAll();
     res.render("index", { skaters }); 
   } catch (err) {
-    console.error(err);
     res.status(500).render("error", { err });
   }
 };
@@ -34,12 +34,9 @@ export const createSkater = async (req, res) => {
   const { email, nombre, password, anos_experiencia, especialidad, estado } =
     req.body;
 
-  // Check if file was uploaded
   if (!req.files || !req.files.foto) {
     return res.status(400).send("No files were uploaded.");
   }
-
-  // The name of the input field (i.e. "foto") is used to retrieve the uploaded file
   const photo = req.files.foto;
   const __dirname = path.resolve();
 
@@ -47,14 +44,11 @@ export const createSkater = async (req, res) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
-
-  // Use the mv() method to place the file in the "public/assets/imgs" directory
   const photoPath = path.join("assets/imgs", photo.name);
   const uploadPath = path.join(__dirname, "public", photoPath);
 
   photo.mv(uploadPath, async function (err) {
     if (err) {
-      console.error("Error uploading photo:", err);
       return res.status(500).send(err);
     }
     console.log("Photo uploaded successfully");
@@ -85,8 +79,7 @@ export const login = async (req, res) => {
   try {
     res.status(200).render("login");
   } catch (err) {
-    console.error(err);
-    res.status(500).render("error", { err });
+    res.status(500).render("error", { err: "Login Error" });
   }
 };
 
@@ -99,9 +92,6 @@ export const checkLogin = async (req, res) => {
     if (!user) {
       return res.status(404).send("User not found");
     }
-    // Log the retrieved user for debugging
-    console.log("User retrieved from database:", user);
-
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (passwordMatch) {
       const token = jwt.sign(
@@ -111,8 +101,7 @@ export const checkLogin = async (req, res) => {
       );
       req.session.token = token;
       req.session.email = user.email;
-
-      console.log("Login successful");
+      
       if(user.is_admin) {
         return res.status(200).redirect("/admin");
 
@@ -120,12 +109,10 @@ export const checkLogin = async (req, res) => {
       return res.status(200).render("datos", { user });
 
     } else {
-      console.log("Incorrect password");
       res.status(401).send("Incorrect password");
     }
   } catch (err) {
-    console.error("Error during login:", err);
-    res.status(500).send("An error occurred during login");
+    res.status(500).render("error", { err: "Error in Login" });
   }
 };
 
@@ -135,7 +122,6 @@ export const logAdmin = async (req, res) => {
     const skaters = await findAll();
     res.render("admin", { skaters });
   } catch (err) {
-    console.error(err);
     res.status(500).render("error", { err });
   }
 };
@@ -146,7 +132,6 @@ export const getProfile = async (req, res) => {
     const skater = await findByEmail(email);
     res.render("datos", { skater });
   } catch (err) {
-    console.error(err);
     res.status(500).render("error", { err });
   }
 };
@@ -155,10 +140,7 @@ export const updateProfile = async (req, res) => {
   const email = req.session.email;
   const { nombre, password, passwordRepeat, anos_experiencia, especialidad } = req.body;
 
-  console.log("Updating profile for email:", email); // Debugging line
-
   if (!email) {
-    console.error("Session email is undefined");
     return res.status(400).render("error", { err: "Session email is undefined" });
   }
 
@@ -170,7 +152,6 @@ export const updateProfile = async (req, res) => {
     const user = await findByEmail(email);
 
     if (!user) {
-      console.error("User not found:", email);
       return res.status(404).render("error", { err: "User not found" });
     }
 
@@ -192,8 +173,7 @@ export const updateProfile = async (req, res) => {
     res.redirect("/");
     
   } catch (err) {
-    console.error("Error in updateProfile:", err);
-    res.status(500).render("error", { err });
+    res.status(500).render("error", { err: "Error updating profile" });
   }
 };
 
@@ -205,11 +185,21 @@ export const deleteAccount = async (req, res) => {
     req.session.destroy(); 
     res.json({ success: true }); 
   } catch (err) {
-    console.error("Error deleting skater:", err);
-    res.status(500).json({ success: false, error: "Error deleting skater" }); 
+    res.status(500).render("error", { err: "Deleting Skater error" }); 
   }
 };
 
+export const updateEstado = async (req, res) => {
+  const skaterId = req.params.id;
+  const { estado } = req.body;
+
+  try {
+    await updateSkaterEstado(skaterId, estado);
+    res.status(200).send("Estado updated successfully");
+  } catch (error) {
+    res.status(500).render("error", { err: "Updating Estado fails" });
+  }
+};
 
 
 

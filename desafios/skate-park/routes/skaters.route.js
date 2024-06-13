@@ -10,6 +10,7 @@ import {
   getProfile,
   updateProfile,
   deleteAccount,
+  updateEstado,
 } from "../controllers/skaters.controller.js";
 
 const router = Router();
@@ -29,6 +30,7 @@ router.delete("/delete-skater", isAuthenticated, deleteAccount);
 
 //admin
 router.get("/admin", isAuthenticated, isAdmin, logAdmin );
+router.patch("/update-estado/:id", isAuthenticated, isAdmin, updateEstado);
 
 
 export default router;
