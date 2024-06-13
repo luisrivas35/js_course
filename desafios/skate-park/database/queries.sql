@@ -1,7 +1,6 @@
 -- Drop the skaters table if it exists
 DROP TABLE IF EXISTS skaters;
 
--- Create the skaters table
 CREATE TABLE skaters (
     id SERIAL PRIMARY KEY,
     email VARCHAR(50) UNIQUE NOT NULL,
@@ -14,7 +13,6 @@ CREATE TABLE skaters (
     is_admin BOOLEAN DEFAULT FALSE
 );
 
--- Insert sample data
 INSERT INTO skaters (email, nombre, password, anos_experiencia, especialidad, foto, estado, is_admin)
 VALUES
 ('tony.hawk@example.com', 'tony', '$2b$10$EkCrejtHYXSow5FbquwekOLCIjuHZn6QxoO8q7tRBifuGZxnHZml2', 5, 'Freestyle', 'assets/imgs/tony.jpg', true, false),
@@ -22,5 +20,5 @@ VALUES
 ('dany@example.com', 'dany', '$2b$10$EkCrejtHYXSow5FbquwekOLCIjuHZn6QxoO8q7tRBifuGZxnHZml2', 3, 'Jumps', 'assets/imgs/danny.jpg', true, false),
 ('admin@example.com', 'admin', '$2b$10$rQr6k/U.SA/Jj46UemmRaOwO1XKIdHaRYweMUPvCjnJs8wpFZ.iju', 3, 'Street', 'assets/imgs/police.jpg', true, true);
 
--- Select all skaters
+
 SELECT * FROM skaters;
