@@ -3,7 +3,12 @@ import fs from "fs";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import "dotenv/config";
-import { findAll, findByEmail, createSkater as createSkaterModel,
+import {
+  findAll,
+  findByEmail,
+  updateSkater,
+  deleteSkater,
+  createSkater as createSkaterModel,
 } from "../models/skaters.model.js";
 
 export const getAllSkaters = async (req, res) => {
@@ -105,6 +110,7 @@ export const checkLogin = async (req, res) => {
         { expiresIn: "1h" }
       );
       req.session.token = token;
+      req.session.email = user.email;
 
       console.log("Login successful");
       if(user.is_admin) {
@@ -145,6 +151,64 @@ export const getProfile = async (req, res) => {
   }
 };
 
+export const updateProfile = async (req, res) => {
+  const email = req.session.email;
+  const { nombre, password, passwordRepeat, anos_experiencia, especialidad } = req.body;
+
+  console.log("Updating profile for email:", email); // Debugging line
+
+  if (!email) {
+    console.error("Session email is undefined");
+    return res.status(400).render("error", { err: "Session email is undefined" });
+  }
+
+  if (password && password !== passwordRepeat) {
+    return res.status(400).render("error", { err: "Passwords do not match" });
+  }
+
+  try {
+    const user = await findByEmail(email);
+
+    if (!user) {
+      console.error("User not found:", email);
+      return res.status(404).render("error", { err: "User not found" });
+    }
+
+    let updatedData = {
+      nombre,
+      anos_experiencia,
+      especialidad,
+      password: user.password 
+    };
+
+    
+    if (password && password !== user.password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updatedData.password = hashedPassword;
+    }
+
+    await updateSkater(email, updatedData);
+
+    res.redirect("/");
+    
+  } catch (err) {
+    console.error("Error in updateProfile:", err);
+    res.status(500).render("error", { err });
+  }
+};
+
+export const deleteAccount = async (req, res) => {
+  const email = req.session.email;
+
+  try {
+    await deleteSkater(email); 
+    req.session.destroy(); 
+    res.json({ success: true }); 
+  } catch (err) {
+    console.error("Error deleting skater:", err);
+    res.status(500).json({ success: false, error: "Error deleting skater" }); 
+  }
+};
 
 
 

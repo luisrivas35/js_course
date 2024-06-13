@@ -12,6 +12,7 @@ export const findAll = async () => {
 
 export const findByEmail = async (email) => {
   try {
+    
     const query = {
       text: "SELECT * FROM skaters WHERE email = $1",
       values: [email],
@@ -59,50 +60,32 @@ export const createSkater = async (skaterData) => {
   }
 };
 
-
-
-// Additional functions can be added here for other CRUD operations
-const updateSkater = async (id, skaterData) => {
-  const {
-    email,
-    nombre,
-    password,
-    anos_experiencia,
-    especialidad,
-    foto,
-    estado,
-  } = skaterData;
-  try {
-    const sql = `UPDATE skaters SET email = ?, nombre = ?, password = ?, anos_experiencia = ?, especialidad = ?, foto = ?, estado = ? WHERE id = ?`;
-    const [results] = await execute(sql, [
+export const updateSkater = async (email, updatedData) => {
+  const query = {
+    text: `UPDATE skaters 
+           SET nombre = $1, password = $2, anos_experiencia = $3, especialidad = $4 
+           WHERE email = $5`,
+    values: [
+      updatedData.nombre,
+      updatedData.password,
+      updatedData.anos_experiencia,
+      updatedData.especialidad,
       email,
-      nombre,
-      password,
-      anos_experiencia,
-      especialidad,
-      foto,
-      estado,
-      id,
-    ]);
-    return results.affectedRows; // Return the number of affected rows (0 or 1)
-  } catch (err) {
-    console.error("Error updating skater:", err);
-    throw err; // Re-throw the error for handling at a higher level
-  }
+    ],
+  };
+  await pool.query(query);
 };
 
-const deleteSkater = async (email) => {
+export const deleteSkater = async (email) => {
   try {
     const query = {
-      text: "DELETE FROM skaters WHERE email = $11",
+      text: "DELETE FROM skaters WHERE email = $1",
       values: [email],
     };
     await pool.query(query);
-    
-    return ; 
   } catch (err) {
     console.error("Error deleting skater:", err);
-    throw err; 
+    throw err;
   }
 };
 

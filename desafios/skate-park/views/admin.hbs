@@ -34,6 +34,7 @@
         <tbody>
           
           {{#each skaters}}
+            {{!-- {{#unless this.is_admin}} --}}
             <tr>
               <td>{{this.id}}</td>
               <td><img src="/{{this.foto}}" alt="{{this.nombre}}" /></td>
@@ -47,6 +48,7 @@
                 {{/if}}</td>
 
             </tr>
+            {{!-- {{/unless}} --}}
           {{/each}}
           {{!-- <tr>
             <th scope="row">1</th>
